@@ -1,0 +1,31 @@
+.logo {
+    text-align: center;
+    background-color: rgb(52, 55, 68);
+    padding: 46px 37px 67px 36px;
+
+    img {
+        width: 117px;
+        height: 32px
+    }
+}
+
+.sidebar-container {
+    transition: width 0.28s;
+    width: 100% !important;
+    height: 100%;
+    z-index: 1001;
+    overflow: hidden;
+}
+.el-main{
+    background: #F5F5F5;
+    .main-body{
+        background: #ffffff;
+        position: relative;
+        z-index: 1;
+        padding: 30px 28px;
+        border-radius: 4px;
+    }
+    .main-body:first-child{
+        min-height: 100%;
+    }
+}
