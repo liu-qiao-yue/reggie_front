@@ -1,15 +1,5 @@
-.login {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.login, .login-box  {
   height: 100%;
-  background-color: #333;
-}
-.login-box {
-  width: 1000px;
-  height: 474.38px;
-  border-radius: 8px;
-  display: flex;
 }
 
 .login-box img {
@@ -23,12 +13,10 @@
   color: #707070;
 }
 .login-form {
-  background: #ffffff;
-  width: 40%;
-  border-radius: 0px 8px 8px 0px;
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 100%;
 }
 .login-form .el-form {
   width: 214px;
@@ -80,11 +68,6 @@
   font-size: 14px;
   border: 0;
   background-color: #ffc200;
-}
-.login-btn:hover,
-.login-btn:focus {
-  /* background: #FFC200; */
-  /* color: #ffffff; */
 }
 .login-form-title {
   height: 36px;

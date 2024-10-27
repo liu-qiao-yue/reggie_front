@@ -1,7 +1,7 @@
 <template class="template">
   <div class="login">
     <div class="login-box">
-      <img src="@/assets/images/login/login-l.png" alt="">
+      <!-- <img src="@/assets/images/login/login-l.png" alt=""> -->
       <div class="login-form">
         <el-form ref="loginFormRef" :model="loginForm" :rules="loginRules" >
           <div class="login-form-title">
@@ -66,7 +66,10 @@ const loginRules = reactive<FormRules<EmployeeInter>>({
       const {data} = await _loginIn(requestForm);
       if (String(data.code) === '1') {
         if(loginForm.password == '123456'){
-          routerStore.push({name: "changePassword", params: {id: data.data.id}})
+          // 注意使用 params 时一定不能使用 path
+          // routerStore.push({name: "changePassword", params: {id: data.data.id, name: data.data.name}})
+          routerStore.push({path: '/changePassword', query: {id: data.data.id, name: data.data.name}})
+
         }else{
           ElMessage.success('登录成功');
           const path = "/employee/member/index";

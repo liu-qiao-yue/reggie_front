@@ -9,14 +9,10 @@
       :total="total" :disabled="false" :background="true" @update:pagination="changePagination">
       <!-- 自定义操作列插槽 -->
       <template #actions="{ row }">
-        <i class="iconfont icon-icon-edit" title="编辑" @click="handleEdit(row)" />
-        <i :class="'iconfont ' + (row.status == '1' ? 'icon-lock' : 'icon-unlock')" 
-          :title="row.status == '1' ? '禁用' : '启用'" @click="updateStatus(row)" />
-        <i class="iconfont icon-icons-" title="重置密码" @click="resetPwd(row)" />
-        <!-- <span @click="updateStatus(row)">{{ row.status == '1' ? '禁用' : '启用' }}</span> -->
-        <!-- <span @click="resetPwd(row)" v-if="isShowResetPwd">|重置密码</span> -->
-        <!-- <span @click="resetPwd(row)">|重置密码</span> -->
-
+        <i class="iconfont icon-icon-edit" title="编辑" @click="handleEdit(row)"></i>
+        <i :class="'iconfont ' + (row.status == '1' ? 'icon-lock' : 'icon-unlock')"
+          :title="row.status == '1' ? '禁用' : '启用'" @click="updateStatus(row)"></i>
+        <i class="iconfont icon-icons-" title="重置密码" @click="resetPwd(row)"></i>
       </template>
 
       <!-- 自定义其他列 -->
@@ -26,11 +22,14 @@
     </CustomTable>
     <AddOrEdit v-if="isShowAddOrEdit" :isShow="isShowAddOrEdit" :title="title" :id="currentId"
       @closeAddRrEdit="closeAddorEdit"></AddOrEdit>
+
+    <ConfirmModal :isShow="isShowConfirmModal" :confirmType="confirmType" 
+      @closeConfirmModal="closeConfirmModal"></ConfirmModal>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, reactive } from 'vue';
 import { _employeePage, _updateEmployee } from '@/apis/employeeApi';
 import CustomTable from '@/views/common/CustomTable.vue';
 import type { EmployeeInter } from '@/types/EmployeeInters';
@@ -40,6 +39,7 @@ import type { ResetPasswordRequest } from '@/types/ResetPasswordForm';
 import { _changePassword } from '@/apis/commonApi';
 import encodePassword from '@/utils/commonUtils';
 import { employeeColumn } from '@/js/TableColumns';
+import ConfirmModal from '@/views/common/ConfirmModal.vue';
 
 
 // 定义表格列的元数据
@@ -54,13 +54,18 @@ const total = ref(0);
 // 分页数据
 const pagedData = ref<EmployeeInter[]>([]);
 
-
+// 添加或编辑弹窗
 const isShowAddOrEdit = ref(false);
 const currentId = ref('');
 const title = ref('');
 
+// 是否显示重置密码标签
 const isShowResetPwd = ref(false);
 
+// confirmModal 弹窗
+const isShowConfirmModal = ref(false)
+const confirmType = ref('')
+let currentItem = reactive<EmployeeInter>({})
 // 获取分页数据
 const fetchData = async () => {
   try {
@@ -110,22 +115,41 @@ function closeAddorEdit(res: boolean) {
 }
 
 const updateStatus = (row: EmployeeInter) => {
-  const request: EmployeeInter = {
-    id: row.id,
-    status: row.status == '1' ? '0' : '1'
+  currentItem = JSON.parse(JSON.stringify(row))
+  // 0 已禁用
+  confirmType.value = row.status == '0' ? 'unlock' : 'lock'
+  isShowConfirmModal.value = true
+}
+
+const resetPwd = (row: EmployeeInter) => {
+  currentItem = JSON.parse(JSON.stringify(row))
+  // 1. 锁定 需要启用
+  confirmType.value = 'resetPwd'
+  isShowConfirmModal.value = true
+}
+
+const closeConfirmModal = (data: boolean) => {
+  isShowConfirmModal.value = false
+  if(!data)return;
+
+  if(confirmType.value == 'unlock' || confirmType.value == 'lock'){
+    const request: EmployeeInter = {
+    id: currentItem.id,
+    status: currentItem.status == '1' ? '0' : '1'
   }
 
   _updateEmployee(request).then(({ data }) => {
     if (data.code == 1) {
       ElMessage.success("修改成功");
-      row.status = request.status;
+      fetchData()
     }
   })
-}
+    return
+  }
 
-const resetPwd = (row: EmployeeInter) => {
-  const request: ResetPasswordRequest = {
-    id: row.id as string,
+  if(confirmType.value == 'resetPwd'){
+    const request: ResetPasswordRequest = {
+    id: currentItem.id as string,
     type: 'reset',
     newPassword: encodePassword('123456')
   }
@@ -135,6 +159,8 @@ const resetPwd = (row: EmployeeInter) => {
       ElMessage.success("重置密码成功");
     }
   })
+    return
+  }
 }
 </script>
 
@@ -143,7 +169,9 @@ const resetPwd = (row: EmployeeInter) => {
   display: flex;
   justify-content: space-between;
 }
-.icon-lock, .icon-unlock {
-    margin: 0 10px;
+
+.icon-lock,
+.icon-unlock {
+  margin: 0 10px;
 }
 </style>

@@ -47,8 +47,6 @@ const localIsShow = ref(props.isShow);
 
 // 监听 props.isShow 的变化，当其变化时更新 localIsShow
 watch(() => props.isShow, (newVal) => {
-  console.log('@@@@');
-
   localIsShow.value = newVal;
 });
 
@@ -65,29 +63,6 @@ const confirmChange = () => {
       emit('closeResetPwd', true);
     }
   })
-
-  
-  // console.log('@@', "confirmChange");
-  // submitForm().then(async (valid) => {
-  //   if (valid) {
-  //     const userInfo = JSON.parse(localStorage.getItem('userInfo') as string)
-  //     // resetPasswordForm.type='change'
-  //     // resetPasswordForm.id = userInfo.id
-  //     const request: ResetPasswordRequest = {
-  //       id: userInfo.id,
-  //       type: 'change',
-  //       oldPassword: encodePassword(resetPasswordForm.oldPassword),
-  //       newPassword: encodePassword(resetPasswordForm.newPassword)
-  //     }
-  //     const { data } = await _changePassword(request);
-  //     if (data.code == '1') {
-  //       ElMessage.success('修改密码成功')
-  //       emit('closeResetPwd', true);
-  //     } else {
-  //       ElMessage.error(data.msg)
-  //     }
-  //   }
-  // })
 };
 
 

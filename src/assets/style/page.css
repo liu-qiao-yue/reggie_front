@@ -24,3 +24,14 @@
 .m-b-20 {
     margin-bottom: 20px;
 }
+
+.text-right{
+    text-align: right;
+}
+.m-r-10 {
+    margin-right: 10px;
+}
+
+.vertical-middle {
+    vertical-align: middle;
+}

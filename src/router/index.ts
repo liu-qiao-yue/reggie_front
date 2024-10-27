@@ -25,14 +25,14 @@ const router = createRouter({
           path: '/login',
           component: () => import(`@/components/login/LoginIndex.vue`), // 使用 _import 函数动态导入 EmployeeLogin
           meta: {
-            title: '首页', // 标题
+            title: '登录页', // 标题
             keepAlive: false, // 是否保存
             id: 1, // 唯一标识符
             noCache: true // 是否缓存
           }
         },
         {
-          path: '/changePassword/:id',
+          path: '/changePassword',
           component: ()=> import(`@/components/login/changePassword.vue`),
           name: 'changePassword',
           meta: { title: '修改密码', noCache: true, keepAlive: false, id: '2' }

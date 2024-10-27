@@ -33,7 +33,6 @@ export default function () {
   }
 
   const validateAndSubmit = (id: string, type: 'change' | 'reset') => {
-    console.log(id, type);
     
     return submitForm().then(async isValid => {
       if (isValid) {
@@ -43,7 +42,6 @@ export default function () {
           newPassword: encodePassword(resetPasswordForm.newPassword),
           type: type
         }
-        console.log(request);
         const { data } = await _changePassword(request);
         if (data.code == '1') {
           ElMessage.success('修改密码成功')
@@ -57,11 +55,17 @@ export default function () {
 
   }
 
+  const resetForm = () => {
+    if (!resetFormRef.value) return
+    resetFormRef.value.resetFields()
+  }
+
   return {
     resetFormRef,
     resetPasswordForm,
     rules,
     submitForm,
-    validateAndSubmit
+    validateAndSubmit,
+    resetForm
   }
 }
