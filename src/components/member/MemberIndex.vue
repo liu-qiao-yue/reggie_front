@@ -3,10 +3,10 @@
     <div class="tableBar m-b-20">
       <el-input v-model="name" style="width: 240px" placeholder="请输入员工姓名" clearable @keyup.enter="fetchData"
         @clear="fetchData" />
-      <el-button type="primary" @click="handleEdit" color="#ffc200">+ 添加员工</el-button>
+      <el-button type="primary" @click="handleEdit">+ 添加员工</el-button>
     </div>
     <CustomTable :table-data="pagedData" :columns="columns" :current-page="currentPage" :page-size="pageSize"
-      :total="total" :disabled="false" :background="true" @update:pagination="changePagination">
+      :total="total" :isDisabledPagination="false" :background="true" @update:pagination="changePagination" :show-index-column="true">
       <!-- 自定义操作列插槽 -->
       <template #actions="{ row }">
         <i class="iconfont icon-icon-edit" title="编辑" @click="handleEdit(row)"></i>

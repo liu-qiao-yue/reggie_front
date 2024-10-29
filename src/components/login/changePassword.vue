@@ -19,7 +19,7 @@
 
         <div class="reset-password-btn">
           <el-button @click="resetForm">重置</el-button>
-          <el-button  @click="confirmChange" color="#ffc200">确定</el-button>
+          <el-button  @click="confirmChange">确定</el-button>
         </div>
       </el-form>
     </div>

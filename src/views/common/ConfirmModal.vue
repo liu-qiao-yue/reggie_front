@@ -3,21 +3,24 @@
         modal-append-to-body :close-on-press-escape="false" :close-on-click-modal="false" class="confirm-modal-container"
         append-to-body modal>
         <template #header>
-            <div class="dialog-title">
-                <!-- <i class="el-icon-warning vertical-middle m-r-10"></i> -->
-                <el-icon class="el-icon-warning vertical-middle m-r-10"><Warning/></el-icon>
+            <div class="dialog-title">                
                 <span>
                     {{ text[confirmType].title }}
                 </span>
             </div>
         </template>
 
-        <div class="model-content">{{ text[confirmType].content }}</div>
+        <div class="model-content">
+            <el-icon class="el-icon-warning vertical-middle m-r-10"><Warning/></el-icon>
+            <span class="type-content">
+                {{ text[confirmType].content }}
+            </span>
+        </div>
 
         <template #footer>
             <div class="text-right opt-footer">
                 <el-button @click="closeDialog(false)">{{ text[confirmType].cancelButtonText }}</el-button>
-                <el-button type="primary" color="#ffc200" class="vo-ui" @click="closeDialog(true)">{{
+                <el-button type="primary" class="vo-ui" @click="closeDialog(true)">{{
                     text[confirmType].confirmButtonText }}</el-button>
             </div>
         </template>
@@ -65,5 +68,6 @@ const handleClose = () => {
 
 </script>
 <style lang="scss" scoped>
+
 
 </style>

@@ -161,3 +161,20 @@ a:hover {
   background-color: #ffc200;
   border-color: #ffc200;
 } */
+ 
+.el-button:focus, .el-button:hover {
+  color: #ffc200 !important;
+  border-color: #ffdec5 !important;
+  background-color: #fff4ec !important;
+}
+
+.el-button--primary:focus, .el-button--primary:hover {
+  background: #fdd24c !important;
+  border-color: #fdd24c  !important;
+  color: #333333  !important;
+}
+.el-button--primary {
+  color: #333333 !important;
+  background-color: #ffc200 !important;
+  border-color: #ffc200 !important;
+}

@@ -1,15 +1,15 @@
 <template>
   <div class="container">
     <div class="tableBar m-b-20">
-      <el-button type="primary" @click="a" color="#333333"> + 新增菜品分类</el-button>
-      <el-button type="primary" @click="a" color="#ffc200"> + 新增套餐分类</el-button>
+      <el-button type="primary" @click="a" class="add-dish-type"> + 新增菜品分类</el-button>
+      <el-button type="primary" @click="a"> + 新增套餐分类</el-button>
     </div>
     <CustomTable :table-data="categoryPage" :columns="columns" :current-page="currentPage" :page-size="pageSize"
-      :total="total" :disabled="false" :background="true" @update:pagination="changePagination">
+      :total="total" :isDisabledPagination="false" :background="true" @update:pagination="changePagination" :show-index-column="true">
       <!-- 自定义操作列插槽 -->
-      <template #actions="{ row }">
-        <i class="iconfont icon-icon-edit" title="编辑" @click="handleEdit(row)" />
-        <i class="iconfont icon-icon_delete" title="删除" @click="handleDelete(row)" />
+      <template #actions="{ row, index }">
+        <i class="iconfont icon-icon-edit m-r-10" title="编辑" @click="handleEdit(row, index)"></i>
+        <i class="iconfont icon-icon_delete" title="删除" @click="handleDelete(row, index)"></i>
       </template>
 
       <!-- 自定义其他列 -->
@@ -47,11 +47,12 @@ function changePagination(newCurrentPage: number, newPageSize: number) {
   getCategoryPage();
 }
 
-const handleEdit = (row: CategoryInter) => {
-
+const handleEdit = (row: CategoryInter, index: number) => {
+  console.log(index);
+  
 }
 
-const handleDelete = (row: CategoryInter) => {
+const handleDelete = (row: CategoryInter, index: number) => {
 
 }
 
@@ -72,7 +73,15 @@ onMounted(() => {
 });
 </script>
 <style lang="scss" scoped>
-.icon-icon-edit{
-  margin-right: 10px;
+.add-dish-type {
+  border-color: #333333 !important;
+  background: #333333 !important;
+  color: #ffffff !important;
+
+  &:hover {
+    background-color: #999999 !important;
+    border-color: #999999 !important;
+    color: #ffffff !important;
+  }
 }
 </style>
