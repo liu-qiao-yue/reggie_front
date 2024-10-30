@@ -138,8 +138,6 @@ const updateForm = () => {
 
 
 onMounted(() => {
-
-  console.log('@@@@', 'onMounted');
   if (props.id) {
     _employeeInfo(props.id).then(res => {
       Object.assign(employeeForm, res.data.data as EmployeeInter);
@@ -157,7 +155,7 @@ onMounted(() => {
   }
 })
 const validateForm = () => {
-  if (!employeeRef.value) return
+  if (!employeeRef.value) return Promise.reject();
   const field = ['name', 'username', 'sex']
   if (editIdNumber.value) field.push('idNumber')
   if (editPhone.value) field.push('phone')

@@ -48,7 +48,7 @@
 </template>
 
 <script lang="ts" setup>
-import { defineProps, computed, ref, defineEmits } from 'vue';
+import {computed, ref, defineEmits } from 'vue';
 import type { TableColumn, TableRow } from '@/types/TableInter';
 
 // 定义组件属性

@@ -39,11 +39,6 @@
 .confirm-modal-container{
     .el-dialog__header{
         border-bottom: none !important;
-        .dialog-title{
-            font-size: 16px;
-            font-family: MicrosoftYaHei, MicrosoftYaHei-Bold;
-            font-weight: 700;
-        }
     }
     .el-dialog__body{
         padding: 10px !important;
@@ -54,24 +49,23 @@
                 color: #ffb302;
                 width: 25px !important;
                 height: 25px !important;
-                vertical-align: middle;
             }
         }
     }
     .el-dialog__footer{
         border-top: none !important;
-        .el-button{
-            height: 35px !important;
-            width: 80px;
-            span{
-                font-size: 14px;
-                font-family: PingFangSC, PingFangSC-Medium !important;
-                font-weight: 500 !important;
-                color: #333333 !important;
-                padding: 8px 10px;
-            
-            }
-        }
         
     }
 }
+
+.el-button.continue {
+    border-color: #333333 !important;
+    background: #333333 !important;
+    color: #ffffff !important;
+  
+    &:hover {
+      background-color: #999999 !important;
+      border-color: #999999 !important;
+      color: #ffffff !important;
+    }
+  }

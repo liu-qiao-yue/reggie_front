@@ -1,5 +1,5 @@
 import request from '@/js/request'
-import type { CategoryInter } from '@/types/CategoryInter'
+import type { CategoryForm } from '@/types/CategoryInter'
 
 /**
  * 分页列表
@@ -20,7 +20,7 @@ export function _categoryPage(page: number, pageSize: number) {
  * @param data 
  * @returns 
  */
-export function _saveCategory(data: CategoryInter) {
+export function _saveCategory(data: CategoryForm) {
     return request({
         url: '/backend/category',
         method: 'post',
@@ -33,7 +33,7 @@ export function _saveCategory(data: CategoryInter) {
  * @param data 
  * @returns 
  */
-export function _updatecategory(data: CategoryInter) {
+export function _updatecategory(data: CategoryForm) {
     return request({
         url: '/backend/category',
         method: 'put',
@@ -46,9 +46,9 @@ export function _updatecategory(data: CategoryInter) {
  * @param id 
  * @returns 
  */
-export function _categoryInfo(id:string) {
+export function _deleteCategory(id:string) {
     return request({
-        url: '/backend/category/' + id,
+        url: '/backend/category?ids=' + id,
         method: 'DELETE',
     })
 }

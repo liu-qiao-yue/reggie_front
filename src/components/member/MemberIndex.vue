@@ -14,11 +14,6 @@
           :title="row.status == '1' ? '禁用' : '启用'" @click="updateStatus(row)"></i>
         <i class="iconfont icon-icons-" title="重置密码" @click="resetPwd(row)"></i>
       </template>
-
-      <!-- 自定义其他列 -->
-      <template #custom-column="{ row }">
-        <span>{{ row.customData }}</span>
-      </template>
     </CustomTable>
     <AddOrEdit v-if="isShowAddOrEdit" :isShow="isShowAddOrEdit" :title="title" :id="currentId"
       @closeAddRrEdit="closeAddorEdit"></AddOrEdit>
@@ -108,7 +103,6 @@ function closeAddorEdit(res: boolean) {
   isShowAddOrEdit.value = false;
   title.value = '';
   currentId.value = '';
-  debugger
   if (res) {
     fetchData();
   }

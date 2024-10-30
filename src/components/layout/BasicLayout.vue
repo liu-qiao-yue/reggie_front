@@ -28,5 +28,5 @@ import HeaderLayout from '@/views/header/HeaderLayout.vue';
 
 </script>
 <style lang="scss" scoped>
-@import "./BasicLayout.scss";
+@use "./BasicLayout.scss";
 </style>
