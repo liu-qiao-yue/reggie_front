@@ -8,8 +8,4 @@ export interface EmployeeInter {
     sex?: string;
     idNumber?: string;//身份证
     status?: string;
-    createTime?: string;
-    updateTime?: string;
-    createUser?: string;
-    updateUser?: string;
 }

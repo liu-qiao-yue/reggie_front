@@ -21,12 +21,17 @@ const app = createApp(App)
 
 // 注册路由
 app.use(router)
-/* 使用插件 */{}
+// 使用插件
 app.use(pinia)
 // 注册 Element Plus
 app.use(ElementPlus)
 
 
+// 设置全局错误处理函数
+app.config.errorHandler = (_err, _instance, _info) => {
+    console.log("全局错误处理函数", _info);
+    
+};
 
 // 挂载应用实例
 app.mount('#app')

@@ -37,6 +37,12 @@ const router = createRouter({
           name: 'changePassword',
           meta: { title: '修改密码', noCache: true, keepAlive: false, id: '2' }
         },
+        {
+          path: '/forgotPassword',
+          component: ()=> import(`@/components/login/ForgotPassword.vue`),
+          name: 'forgotPassword',
+          meta: { title: '忘记密码', noCache: true, keepAlive: false, id: '3' }
+        },
       ]
     },
     {

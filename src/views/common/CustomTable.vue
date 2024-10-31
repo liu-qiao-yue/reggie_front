@@ -3,7 +3,7 @@
     <!-- 表格主体 -->
     <el-table :data="pagedData" style="width: 100%" stripe>
       <!-- 添加序号列，如果需要的话 -->
-      <el-table-column label="序号" width="60" fixed="left" v-if="showIndexColumn">
+      <el-table-column label="序号" width="60" v-if="showIndexColumn">
         <template #default="{ $index }">
           <!-- 序号计算，考虑到了当前页码和页面大小 -->
           {{ $index + 1 + (internalCurrentPage - 1) * internalPageSize }}

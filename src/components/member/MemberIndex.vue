@@ -3,13 +3,13 @@
     <div class="tableBar m-b-20">
       <el-input v-model="name" style="width: 240px" placeholder="请输入员工姓名" clearable @keyup.enter="fetchData"
         @clear="fetchData" />
-      <el-button type="primary" @click="handleEdit">+ 添加员工</el-button>
+      <el-button type="primary" @click="handleEmployee()">+ 添加员工</el-button>
     </div>
     <CustomTable :table-data="pagedData" :columns="columns" :current-page="currentPage" :page-size="pageSize"
       :total="total" :isDisabledPagination="false" :background="true" @update:pagination="changePagination" :show-index-column="true">
       <!-- 自定义操作列插槽 -->
       <template #actions="{ row }">
-        <i class="iconfont icon-icon-edit" title="编辑" @click="handleEdit(row)"></i>
+        <i class="iconfont icon-icon-edit" title="编辑" @click="handleEmployee(row)"></i>
         <i :class="'iconfont ' + (row.status == '1' ? 'icon-lock' : 'icon-unlock')"
           :title="row.status == '1' ? '禁用' : '启用'" @click="updateStatus(row)"></i>
         <i class="iconfont icon-icons-" title="重置密码" @click="resetPwd(row)"></i>
@@ -30,7 +30,7 @@ import CustomTable from '@/views/common/CustomTable.vue';
 import type { EmployeeInter } from '@/types/EmployeeInters';
 import AddOrEdit from '@/views/employee/AddOrEdit.vue';
 import { ElMessage } from 'element-plus';
-import type { ResetPasswordRequest } from '@/types/ResetPasswordForm';
+import type { ResetPasswordRequest } from '@/types/PasswordForm';
 import { _changePassword } from '@/apis/commonApi';
 import encodePassword from '@/utils/commonUtils';
 import { employeeColumn } from '@/js/TableColumns';
@@ -89,7 +89,7 @@ function changePagination(newCurrentPage: number, newPageSize: number) {
 
 
 // 处理编辑操作
-function handleEdit(row: EmployeeInter) {
+function handleEmployee(row?: EmployeeInter) {
   isShowAddOrEdit.value = true;
   if (row) {
     title.value = 'edit';
@@ -145,7 +145,7 @@ const closeConfirmModal = (data: boolean) => {
     const request: ResetPasswordRequest = {
     id: currentItem.id as string,
     type: 'reset',
-    newPassword: encodePassword('123456')
+    password: encodePassword('123456')
   }
 
   _changePassword(request).then(({ data }) => {

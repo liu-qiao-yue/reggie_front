@@ -10,16 +10,16 @@
         <el-form-item label="旧密码" prop="oldPassword">
           <el-input v-model="resetPasswordForm.oldPassword" type="password" placeholder="请输入旧密码"></el-input>
         </el-form-item>
-        <el-form-item label="新密码" prop="newPassword">
-          <el-input v-model="resetPasswordForm.newPassword" type="password" placeholder="请输入新密码"></el-input>
+        <el-form-item label="新密码" prop="password">
+          <el-input v-model="resetPasswordForm.password" type="password" placeholder="请输入新密码"></el-input>
         </el-form-item>
         <el-form-item label="确认新密码" prop="confirmPassword">
           <el-input v-model="resetPasswordForm.confirmPassword" type="password" placeholder="请再次输入新密码"></el-input>
         </el-form-item>
 
         <div class="reset-password-btn">
-          <el-button @click="resetForm">重置</el-button>
-          <el-button  @click="confirmChange">确定</el-button>
+          <el-button type="primary" @click="resetForm">重置</el-button>
+          <el-button type="primary" @click="confirmChange">确定</el-button>
         </div>
       </el-form>
     </div>
@@ -71,8 +71,8 @@ const onBack = () => {
 </script>
 <style lang="scss" scoped>
 .change-password-container {
-  margin: 10px;
-  height: 100%;
+  min-height: 474.38px;
+  padding: 10px;
 
   .el-page-header>.el-page-header__header {
     height: 30px;
@@ -86,7 +86,7 @@ const onBack = () => {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: calc(100% - 20px);
+    min-height: 400px;
 
     .el-form {
       width: 80%;

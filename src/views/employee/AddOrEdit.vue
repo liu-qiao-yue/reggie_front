@@ -13,7 +13,7 @@
         </el-form-item>
         <el-form-item label="手机号" prop="phone">
           <el-input v-model="employeeForm.phone" placeholder="请再次输入手机号" :disabled="!editPhone" autocomplete="off"></el-input>
-          <span @click="showPhone">修改</span>
+          <span @click="showPhone" v-if="id != ''">修改</span>
         </el-form-item>
         <el-form-item label="性别" prop="sex">
           <el-radio-group v-model="employeeForm.sex">
@@ -23,7 +23,7 @@
         </el-form-item>
         <el-form-item label="身份证号" prop="idNumber">
           <el-input v-model="employeeForm.idNumber" placeholder="请再次输入身份证号" :disabled="!editIdNumber" autocomplete="off"></el-input>
-          <span @click="showIdNumber">修改</span>
+          <span @click="showIdNumber"  v-if="id != ''">修改</span>
         </el-form-item>
 
       </el-form>
@@ -44,8 +44,9 @@
 import { ref, watch, reactive, onMounted } from 'vue';
 import { ElMessage, type FormInstance, type FormRules } from 'element-plus'
 import type { EmployeeInter } from '@/types/EmployeeInters';
-import { validatePhone, validateIdNumber } from '@/js/validators';
+import { validatePhone, validateIdNumber, validateUserName } from '@/js/validators';
 import { _employeeInfo, _saveEmployee, _updateEmployee } from '@/apis/employeeApi';
+import encodePassword from '@/utils/commonUtils';
 
 const editPhone = ref(false);
 const editIdNumber = ref(false);
@@ -81,18 +82,19 @@ const rules = reactive<FormRules>({
   ],
   username: [
     { required: true, message: '请输入账号', trigger: 'blur' },
-    { min: 2, max: 20, message: '长度在2 到 20 个字符', trigger: 'blur' }
+    { pattern: /^[a-zA-Z0-9_-]{2,20}$/, message: '用户名必须以字母开头，长度在2-20之间，只能包含字母、数字、下划线', trigger: 'blur' },
+    { validator: (rule, value, callback) => validateUserName(rule, value, callback, props.id), trigger: 'blur' }
   ],
   phone: [
     { required: true, message: '请输入手机号', trigger: 'blur' },
-    { validator: (rule, value, callback) => { if (editPhone.value) validatePhone(rule, value, callback) }, message: '请输入正确的手机号', trigger: 'blur' }
+    { validator: (rule, value, callback) => { if (editPhone.value) validatePhone(rule, value, callback) }, trigger: 'blur' }
   ],
   sex: [
     { required: true, message: '请选择性别', trigger: ['blur', 'change'] }
   ],
   idNumber: [
     { required: true, message: '请输入身份证号', trigger: 'blur' },
-    { validator: (rule, value, callback) => { if (editIdNumber.value) validateIdNumber(rule, value, callback) }, message: '请输入正确的身份证号', trigger: 'blur' }
+    { validator: (rule, value, callback) => { if (editIdNumber.value) validateIdNumber(rule, value, callback) } , trigger: 'blur' }
   ],
 })
 
@@ -108,6 +110,7 @@ const closeDialog = () => {
 const saveForm = async (isExit: boolean) => {
   validateForm().then((valid) => {
     if (valid) {
+      employeeForm.password = encodePassword("123456")
       _saveEmployee(employeeForm).then(({ data }) => {
         if (data.code == '1')
           ElMessage.success("保存成功");
@@ -142,12 +145,6 @@ onMounted(() => {
     _employeeInfo(props.id).then(res => {
       Object.assign(employeeForm, res.data.data as EmployeeInter);
       delete employeeForm.password
-      delete employeeForm.createTime
-      delete employeeForm.updateTime
-      delete employeeForm.updateUser
-      delete employeeForm.createUser
-      console.log(employeeForm);
-
     })
   } else {
     editIdNumber.value = true

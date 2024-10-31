@@ -1,6 +1,6 @@
 import request from '@/js/request'
 import type { EmployeeInter } from '@/types/EmployeeInters'
-import type { ResetPasswordRequest } from '@/types/ResetPasswordForm'
+import type { ForgotPasswordRequest, ResetPasswordRequest } from '@/types/PasswordForm'
 
 export function _loginIn (_params:EmployeeInter) {
     return request({
@@ -20,6 +20,14 @@ export function _loginOut () {
 export function _changePassword (_params:ResetPasswordRequest) {
     return request({
         url: '/backend/employee/changePassword',
+        method: 'post',
+        data: _params
+    })
+}
+
+export function _forgotPassword (_params:ForgotPasswordRequest) {
+    return request({
+        url: '/backend/employee/forgotPassword',
         method: 'post',
         data: _params
     })

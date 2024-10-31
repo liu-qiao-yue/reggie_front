@@ -30,3 +30,14 @@ export function _updateEmployee(data: EmployeeInter) {
         data: data
     })
 }
+export function _validate(username: string, id: string){
+    return request({
+        url: '/backend/employee/validate',
+        method: 'post',
+        data: {
+            username,
+            id
+        },
+        showLoading: false
+    })
+}

@@ -1,5 +1,5 @@
 import axios, { AxiosError, type AxiosResponse, type InternalAxiosRequestConfig } from 'axios'
-import { ElLoading } from 'element-plus'
+import { ElLoading, ElMessage } from 'element-plus'
 
 // 扩展 AxiosRequestConfig 接口以包含 showLoading 属性
 declare module 'axios' {
@@ -63,6 +63,8 @@ service.interceptors.response.use(
     if (error.config && error.config.showLoading && loadingInstance) {
       loadingInstance.close();
     }
+    // 提示请求失败({错误信息，错误类型，	显示时间，单位为毫秒。 设为 0 则不会自动关闭})
+    ElMessage({ message: '请求失败', type: 'error', duration: 5000 })
     return Promise.reject(error);
   }
 )

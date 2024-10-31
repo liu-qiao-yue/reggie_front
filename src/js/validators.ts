@@ -1,4 +1,5 @@
-import type { ResetPasswordForm } from "@/types/ResetPasswordForm";
+import type { ForgotPasswordForm, ResetPasswordForm } from "@/types/PasswordForm";
+import { _validate } from "@/apis/employeeApi";
 
 export function validatePasswordRegex(rule: unknown, value: string, callback: (arg0: Error | undefined) => void) {
     const regex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
@@ -9,9 +10,9 @@ export function validatePasswordRegex(rule: unknown, value: string, callback: (a
     }
   }
   
-  export function validateConfirmPassword(passwordForm:ResetPasswordForm) {
+  export function validateConfirmPassword(data:ResetPasswordForm | ForgotPasswordForm) {
     return (rule: unknown, value: string, callback: (arg0: Error | undefined) => void) => {
-      if (value !== passwordForm.newPassword) {
+      if (value !== data.password) {
         callback(new Error('两次输入的密码不一致'));
       } else {
         callback(undefined);
@@ -37,7 +38,15 @@ export function validatePasswordRegex(rule: unknown, value: string, callback: (a
     }
   }
 
-
-  export function defaultValidate (rule: unknown, value: string, callback: (arg0: Error | undefined) => void){
-      callback(undefined)
+  export function validateUserName (rule: unknown, value: string, callback: (arg0: Error | undefined) => void, id: string){
+    _validate(value, id).then(({data}) => {
+      if (data.code === 0) {
+        callback(new Error(data.msg))
+      }
+      if (data.code === 1 && data.data === false) {
+        callback(undefined)
+      }else{
+      callback(new Error("该账号已存在，请重新输入"))
+    }
+    })
   }

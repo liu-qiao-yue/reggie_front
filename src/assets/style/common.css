@@ -69,7 +69,8 @@ a:hover {
 
 /* 菜单 */
 .el-menu {
-  background-color: rgb(52, 55, 68) !important
+  background-color: rgb(52, 55, 68) !important;
+  height: 100% !important;
 }
 
 .el-menu .el-menu-item {
@@ -207,4 +208,12 @@ a:hover {
   color: #333333 !important;
   background-color: #ffc200 !important;
   border-color: #ffc200 !important;
+}
+/* scrollbar */
+.el-scrollbar__wrap {
+  overflow: scroll;
+  height: 100%;
+  .el-scrollbar__view{
+    height: 100%;;
+  }
 }
