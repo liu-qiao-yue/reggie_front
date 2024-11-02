@@ -41,9 +41,9 @@ import { useRouter, useRoute } from 'vue-router';
 import { ArrowLeft } from '@element-plus/icons-vue'
 import type { FormInstance, FormRules } from 'element-plus'
 import { validatePasswordRegex, validateConfirmPassword } from '@/js/validators';
-import encodePassword from '@/utils/commonUtils';
+import { encodePassword } from '@/utils/commonUtils';
 import type { ForgotPasswordForm, ForgotPasswordRequest } from '@/types/PasswordForm';
-import { _forgotPassword } from '@/apis/commonApi';
+import { _forgotPassword } from '@/apis/CommonApi';
 
 const router = useRouter();
 const route = useRoute();

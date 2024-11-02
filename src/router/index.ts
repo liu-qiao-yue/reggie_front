@@ -33,7 +33,7 @@ const router = createRouter({
         },
         {
           path: '/changePassword',
-          component: ()=> import(`@/components/login/changePassword.vue`),
+          component: ()=> import(`@/components/login/ChangePassword.vue`),
           name: 'changePassword',
           meta: { title: '修改密码', noCache: true, keepAlive: false, id: '2' }
         },

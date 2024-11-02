@@ -1,7 +1,7 @@
 //vue3框架提供的方法createApp可以用来创建应用实例
 import { createApp } from 'vue'
 //引入清除默认样式
-import '@/assets/style/index.css'
+import '@/assets/style/index.scss'
 // 引入element-plus
 import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'

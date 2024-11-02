@@ -1,0 +1,115 @@
+.common-layout {
+    position: relative;
+    height: 100%;
+    overflow-y: hidden;
+    overflow-x: auto;
+    display: flex;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.iconfont {
+    font-size: 20px;
+    color: #333333;
+    cursor: pointer;
+    vertical-align: middle;
+
+    &:hover {
+        color: #909399;
+    }
+}
+
+.m-b-20 {
+    margin-bottom: 20px;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.m-r-10 {
+    margin-right: 10px;
+}
+
+.vertical-middle {
+    vertical-align: middle;
+}
+
+.confirm-modal-container {
+    .el-dialog__header {
+        border-bottom: none !important;
+    }
+
+    .el-dialog__body {
+        padding: 10px !important;
+
+        .model-content {
+            display: flex;
+            align-items: center;
+
+            .el-icon,
+            .el-icon svg {
+                color: #ffb302;
+                width: 25px !important;
+                height: 25px !important;
+            }
+        }
+    }
+
+    .el-dialog__footer {
+        border-top: none !important;
+
+    }
+}
+
+.el-button.continue {
+    border-color: #333333 !important;
+    background: #333333 !important;
+    color: #ffffff !important;
+
+    &:hover {
+        background-color: #999999 !important;
+        border-color: #999999 !important;
+        color: #ffffff !important;
+    }
+}
+
+.pipe {
+    position: relative;
+
+    /* 使伪元素能够相对于此元素定位 */
+    &::after {
+        content: '|';
+        /* 插入的内容 */
+        position: absolute;
+        /* 绝对定位 */
+        right: 0;
+        /* 定位到右边 */
+        top: 50%;
+        /* 垂直居中 */
+        transform: translateY(-50%);
+        /* 精确垂直居中 */
+        color: #d8dde3 !important;
+    }
+}
+
+.icon-upload{
+    display: inline-block;
+
+    &:before {
+        content: "上传图片" !important;
+        font-size: 12px;
+        color: #000;
+    }
+}
+.avatar-uploader-icon{
+    font-size: 28px;
+    color: #8c939d;
+    width: 200px;
+    height: 160px;
+    line-height: 160px;
+    text-align: center;
+    background: #fcfcfc;
+}

@@ -21,5 +21,13 @@ export default defineConfig({
         rewrite: (path) => path.replace(/^\/backend/, '')
       }
     }
+  },
+  // The legacy JS API is deprecated and will be removed in Dart Sass 2.0.0.
+  css: {
+    preprocessorOptions: {
+      scss: {
+        api: 'modern-compiler', // or 'modern'
+      },
+    },
   }
 })

@@ -1,4 +1,8 @@
 import CryptoJS from 'crypto-js';
-export default function encodePassword(pwd:string){
+export function encodePassword(pwd: string): string {
     return CryptoJS.MD5(pwd).toString();
+}
+
+export function getImage(image: string): string {
+    return `/common/access?name=${image}`
 }

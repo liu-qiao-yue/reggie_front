@@ -25,14 +25,14 @@
 
 <script lang="ts" setup>
 import { ref, onMounted, reactive } from 'vue';
-import { _employeePage, _updateEmployee } from '@/apis/employeeApi';
+import { _employeePage, _updateEmployee } from '@/apis/EmployeeApi';
 import CustomTable from '@/views/common/CustomTable.vue';
 import type { EmployeeInter } from '@/types/EmployeeInters';
 import AddOrEdit from '@/views/employee/AddOrEdit.vue';
 import { ElMessage } from 'element-plus';
 import type { ResetPasswordRequest } from '@/types/PasswordForm';
-import { _changePassword } from '@/apis/commonApi';
-import encodePassword from '@/utils/commonUtils';
+import { _changePassword } from '@/apis/CommonApi';
+import { encodePassword } from '@/utils/commonUtils';
 import { employeeColumn } from '@/js/TableColumns';
 import ConfirmModal from '@/views/common/ConfirmModal.vue';
 
@@ -64,8 +64,6 @@ let currentItem = reactive<EmployeeInter>({})
 // 获取分页数据
 const fetchData = async () => {
   try {
-    console.log("我发请求了");
-
     const { data } = await _employeePage(currentPage.value, pageSize.value, name.value);
     pagedData.value = data.data.records;
     total.value = data.data.total;

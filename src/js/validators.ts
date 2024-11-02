@@ -1,5 +1,5 @@
 import type { ForgotPasswordForm, ResetPasswordForm } from "@/types/PasswordForm";
-import { _validate } from "@/apis/employeeApi";
+import { _validate } from "@/apis/EmployeeApi";
 
 export function validatePasswordRegex(rule: unknown, value: string, callback: (arg0: Error | undefined) => void) {
     const regex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;

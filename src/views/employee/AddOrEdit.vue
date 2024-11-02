@@ -45,8 +45,8 @@ import { ref, watch, reactive, onMounted } from 'vue';
 import { ElMessage, type FormInstance, type FormRules } from 'element-plus'
 import type { EmployeeInter } from '@/types/EmployeeInters';
 import { validatePhone, validateIdNumber, validateUserName } from '@/js/validators';
-import { _employeeInfo, _saveEmployee, _updateEmployee } from '@/apis/employeeApi';
-import encodePassword from '@/utils/commonUtils';
+import { _employeeInfo, _saveEmployee, _updateEmployee } from '@/apis/EmployeeApi';
+import { encodePassword } from '@/utils/commonUtils';
 
 const editPhone = ref(false);
 const editIdNumber = ref(false);
@@ -99,12 +99,10 @@ const rules = reactive<FormRules>({
 })
 
 watch(() => props.isShow, (newVal) => {
-  console.log('@@@@', 'isShow');
   localIsShow.value = newVal;
 });
 
 const closeDialog = () => {
-  console.log('@@', "closeDialog");
   emit('closeAddRrEdit', false);
 };
 const saveForm = async (isExit: boolean) => {

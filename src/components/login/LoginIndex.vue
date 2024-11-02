@@ -30,11 +30,11 @@
 </template>
 <script setup lang="ts" name="LoginIndex">
 import { ref, reactive } from 'vue';
-import { _loginIn } from '@/apis/commonApi';
+import { _loginIn } from '@/apis/CommonApi';
 import type { EmployeeInter } from '@/types/EmployeeInters';
 import { type FormInstance, type FormRules, ElMessage } from 'element-plus'
 import { useMenuStore } from '@/store/useMenuStore';
-import encodePassword from '@/utils/commonUtils';
+import { encodePassword } from '@/utils/commonUtils';
 import { useRouter } from 'vue-router';
 
 
@@ -83,7 +83,6 @@ const submitForm = async () => {
       }
 
     } else {
-      console.log('error submit!', fields)
     }
   })
 }

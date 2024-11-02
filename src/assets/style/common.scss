@@ -2,6 +2,7 @@
 
 body {
   height: 100%;
+  width: 100% !important;
   /* min-width: 1176px; */
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
@@ -176,6 +177,13 @@ a:hover {
   .el-table__body-wrapper>.el-scrollbar {
     color: #312e2e !important;
   }
+
+  .el-table__cell{
+    padding: 12px 0;
+    .cell{
+      padding: 0 8px 0 10px;
+    }
+  }
 }
 
 /* 分页样式 */
@@ -216,4 +224,23 @@ a:hover {
   .el-scrollbar__view{
     height: 100%;;
   }
+}
+
+.el-upload{
+  border: dashed 2px #d8dde3 !important;
+  border-radius: 4px !important;
+  background: #fcfcfc;
+}
+
+
+.el-input__wrapper.is-focus {
+  // border-color: #ffc200;
+  outline: 0;
+  box-shadow: 0 0 0 1px #ffc200 !important;
+}
+.el-select__wrapper.is-focused{
+  box-shadow: 0 0 0 1px #ffc200 !important;box-shadow: 0 0 0 1px #ffc200 !important;
+}
+.el-select-dropdown__item.is-selected{
+  color: #ffc200 !important;
 }

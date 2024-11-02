@@ -74,7 +74,6 @@ const updateForm = async () => {
   await categoryRef.value.validate((valid) => {
     if (valid) {
       ElMessage.success('保存成功');
-      console.log(categoryForm);
       _updatecategory(categoryForm).then(({data}) =>{
         if (data.code == '1')
           ElMessage.success("修改成功");
@@ -90,7 +89,6 @@ const saveForm = async (isClose: boolean) => {
   await categoryRef.value.validate((valid) => {
     if (valid) {
       ElMessage.success('保存成功');
-      console.log(categoryForm);
       _saveCategory(categoryForm).then(({data}) =>{
         if (data.code == '1')
           ElMessage.success("添加成功");
@@ -112,7 +110,6 @@ onMounted(()=>{
     })
   }
   localTitle.value += props.title == 'add'? '新增':'编辑'
-  console.log(props.type);
   
   localTitle.value += props.type == 1?'菜品分类':'套餐分类'
 })

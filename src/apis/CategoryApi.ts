@@ -52,3 +52,12 @@ export function _deleteCategory(id:string) {
         method: 'DELETE',
     })
 }
+
+
+export function _getCategoryList(type:number) {
+    return request({
+        url: '/backend/category/list',
+        method: 'get',
+        params: { type }
+    })
+}

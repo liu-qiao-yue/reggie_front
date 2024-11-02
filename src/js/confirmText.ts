@@ -29,9 +29,9 @@ const text: ConfirmText = {
         cancelButtonText:'取消',
         type:'warning',
     },
-    deleteWindowData:{ //删除操作
+    changeStatus:{ //删除操作
         title:'提示',
-        content:"确认删除本条数据？",
+        content:"确认更改该菜品状态？",
         confirmButtonText:'确定',
         cancelButtonText:'取消',
         type:'warning',

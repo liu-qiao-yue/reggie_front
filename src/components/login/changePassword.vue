@@ -26,7 +26,7 @@
   </div>
 </template>
 <script setup lang="ts" name="changePassword">
-import { _loginOut } from '@/apis/commonApi';
+import { _loginOut } from '@/apis/CommonApi';
 import usePassword from '@/hooks/usePassword';
 import { ElMessage } from 'element-plus';
 // import { useRouterStore } from '@/store/userouterStore';
@@ -45,8 +45,6 @@ const {
   validateAndSubmit,
   resetForm
 } = usePassword()
-
-console.log(route.query);
 
 const confirmChange = () => {
   validateAndSubmit(route.query.id as string, 'change').then(async (res) => {

@@ -2,8 +2,8 @@ import { ref, reactive } from 'vue';
 import type { FormInstance, FormRules } from 'element-plus'
 import { validatePasswordRegex, validateConfirmPassword } from '@/js/validators';
 import type { ResetPasswordForm, ResetPasswordRequest } from '@/types/PasswordForm';
-import encodePassword from '@/utils/commonUtils';
-import { _changePassword } from '@/apis/commonApi';
+import { encodePassword } from '@/utils/commonUtils';
+import { _changePassword } from '@/apis/CommonApi';
 import { ElMessage } from 'element-plus';
 
 export default function () {

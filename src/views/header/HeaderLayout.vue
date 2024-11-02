@@ -28,7 +28,7 @@ import { useMenuStore } from '@/store/useMenuStore';
 import { onMounted, ref } from 'vue';
 import ResetPassword from '../modal/ResetPassword.vue';
 import { ElMessage } from 'element-plus';
-import { _loginOut } from '@/apis/commonApi';
+import { _loginOut } from '@/apis/CommonApi';
 import { useRouter } from 'vue-router';
 
 
@@ -39,7 +39,6 @@ const router = useRouter();
 const menuStore = useMenuStore();
 
 menuStore.$subscribe(() => {
-    console.log("menuStore变化了");
     setTimeout(() => {
         pageName.value = router.currentRoute.value.meta.title as string
     }, 10);
@@ -62,9 +61,7 @@ function resetPassword() {
     showResetPassword.value = true
 }
 
-function closeResetPwd(data: boolean) {
-    console.log('@@', "closeResetPwd");
-    
+function closeResetPwd(data: boolean) {    
     showResetPassword.value = false
     if (data) {
         ElMessage.success('密码修改成功，请重新登录')
