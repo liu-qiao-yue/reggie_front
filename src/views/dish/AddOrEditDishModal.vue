@@ -17,14 +17,13 @@
         </el-form-item>
         <el-form-item label="菜品图片:" prop="image">
           <el-upload 
-          action="/common/upload" 
+          action="/backend/common/upload" 
           :show-file-list="false"
           :on-success="handleAvatarSuccess" 
           :on-change="onChange" 
           ref="uploadRef">
             <el-image
-            :src="getImage(dishForm.image as string)"
-            :preview-src-list="[`/common/acess?name=${dishForm.image}`]">
+            :src="getImage(dishForm.image as string)">
               <template #error>
                 <div class="image-slot">
                   <i class="icon-upload avatar-uploader-icon"></i>
@@ -142,7 +141,6 @@ const save = async () => {
 
   await dishRef.value.validate((valid) => {
     if (valid) {
-      console.log('submit!')
       closeDialog(true)
     }
   })
@@ -150,12 +148,13 @@ const save = async () => {
 };
 
 
-const handleAvatarSuccess = (response: AxiosResponse) => {
+const handleAvatarSuccess = (response: { code: number; msg: string; data: object }) => {
   // 拼接down接口预览
-  if (response.data.code === 0 && response.data.msg === '未登录') {
+  if (response.code === 0 && response.msg === '未登录') {
     router.push("/login")
   } else {
-    dishForm.image = response.data.data
+    debugger
+    dishForm.image = response.data as unknown as string
   }
 }
 

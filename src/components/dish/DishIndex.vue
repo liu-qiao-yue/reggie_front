@@ -2,7 +2,7 @@
   <div class="dish-index-container">
     <div class="container-header m-b-20">
       <div class="input-container">
-        <el-input v-model="name" placeholder="请输入菜品名称" clearable></el-input>
+        <el-input v-model="name" placeholder="请输入菜品名称" clearable @keyup.enter="getDishPage" @clear="getDishPage" ></el-input>
       </div>
       <div class="btn-container">
         <el-link type="primary" class="pipe" :underline="false" @click="deleteHandle('0', null)">批量删除</el-link>
@@ -17,14 +17,14 @@
         :showCheckbox="true" ref="customTableRef">
         <!-- 图片卡槽 -->
         <template #image-column="{ row }">
-          <el-image style="width: auto; height: 40px; border:none;cursor: pointer;" :src="getImage(row.image)"
-            :preview-src-list="[`/common/acess?name=${row.image}`]">
+            <el-image style="width: auto; height: 40px; border:none;cursor: pointer;" :src="getImage(row.image)"
+            :preview-src-list="[`/backend/common/access?name=${row.image}`]" :preview-teleported="true">
             <template #error>
               <div class="image-slot">
                 <img src="@/assets/images/noimg.png" style="width: auto; height: 40px; border:none;">
               </div>
             </template>
-          </el-image>
+          </el-image>          
         </template>
         <!-- 自定义操作列插槽 -->
         <template #actions="{ row }">
@@ -100,8 +100,7 @@ const getDishPage = () => {
     const { data } = res;
     if(data.code === 1){
       dishPage.value = data.data.records;
-      total.value = data.data.total;
-      
+      total.value = data.data.total;      
     }
   })
 }
