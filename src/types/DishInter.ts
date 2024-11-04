@@ -18,7 +18,7 @@ export interface DishInter {
 }
 
 export interface DishDto extends DishInter {
-  flavors?: DishFlavor[];
+  flavors: DishFlavor[];
   categoryName?: string;
   copies?: string;
 }

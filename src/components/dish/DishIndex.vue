@@ -40,7 +40,7 @@
     <ConfirmModal :isShow="isShowConfirmModal" :confirmType="confirmType"
       @closeConfirmModal="closeConfirmModal"></ConfirmModal>
 
-    <AddOrEditDishModal v-if="isShowAddOrEditDishModal" :isShow="isShowAddOrEditDishModal" :title="title"
+    <AddOrEditDishModal v-if="isShowAddOrEditDishModal" :isShow="isShowAddOrEditDishModal" :id="currentId"
       @closeAddOrEditDishModal="closeAddOrEditDishModal"></AddOrEditDishModal>
   </div>
 </template>
@@ -82,7 +82,7 @@ const currentStats = ref<string>('')
 
 // 编辑 & 新增 弹窗相关
 const isShowAddOrEditDishModal = ref(false);
-const title = ref('')
+const currentId = ref('')
 
 function changePagination(newCurrentPage: number, newPageSize: number) {
   pageSize.value = newPageSize;
@@ -173,7 +173,7 @@ const clearable = () =>{
 
 const closeAddOrEditDishModal = (res:boolean) => {
   isShowAddOrEditDishModal.value = false;
-  title.value = ''
+  currentId.value = ''
   if(res){
     getDishPage();
   }
@@ -181,7 +181,7 @@ const closeAddOrEditDishModal = (res:boolean) => {
 
 
 const addOrEditDish = (id: string) => {
-  title.value = id ? '编辑菜品' : '新增菜品'
+  currentId.value = id
   isShowAddOrEditDishModal.value = true
 }
 onMounted(() => {
