@@ -32,3 +32,11 @@ export function _forgotPassword (_params:ForgotPasswordRequest) {
         data: _params
     })
 }
+
+export function _deleteFile (filename:string) {
+    return request({
+        url: '/backend/common/delete',
+        method: 'delete',
+        params: { filename }
+    })
+}

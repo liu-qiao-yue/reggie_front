@@ -1,4 +1,5 @@
 import request from '@/js/request'
+import type { DishDto } from '@/types/DishInter'
 
 /**
  * 分页列表
@@ -29,30 +30,28 @@ export function _deleteDish(ids: string){
     })
 }
 
-
-export function _editDish(ids: string){
-    return request({
-        url: '/backend/dish',
-        method: 'put',
-        params: { ids }
-    })
-}
-
-
-
-export function _addDish(ids: string){
+/**
+ * 新增/编辑保存
+ * @param ids 
+ * @returns 
+ */
+export function _saveDish(dishDto: DishDto){
     return request({
         url: '/backend/dish',
         method: 'post',
-        data: { ids }
+        data: dishDto
     })
 }
 
-
+/**
+ * 根据id查询菜品以及其口味信息
+ * @param id 
+ * @returns 
+ */
 
 export function _queryDishById(id: string){
     return request({
-        url: '/backend/' + id,
+        url: '/backend/dish/' + id,
         method: 'get'
     })
 }
@@ -73,8 +72,7 @@ export function _queryDishList(ids: string){
  */
 export function _dishStatusByStatus(ids: string, status: string){
     return request({
-        url: `/dish/status/${status}`,
-        method: 'post',
-        data: { ids: ids }
+        url: `/backend/dish/status/${status}?ids=${ids}`,
+        method: 'post'
     })
 }

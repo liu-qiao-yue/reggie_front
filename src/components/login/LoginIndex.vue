@@ -58,7 +58,7 @@ const menuStore = useMenuStore();
 const submitForm = async () => {
   if (!loginFormRef.value) return
 
-  await loginFormRef.value.validate(async (valid, fields) => {
+  await loginFormRef.value.validate(async (valid) => {
     if (valid) {
       const requestForm = JSON.parse(JSON.stringify(loginForm))
       // 密码加密

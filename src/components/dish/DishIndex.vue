@@ -8,7 +8,7 @@
         <el-link type="primary" class="pipe" :underline="false" @click="deleteHandle('0', null)">批量删除</el-link>
         <el-link type="primary" class="pipe" :underline="false" @click="statusHandle('1', null)">批量启售</el-link>
         <el-link type="primary" class="" :underline="false" @click="statusHandle('0', null)">批量停售</el-link>
-        <el-button type="primary" @click="addOrEditDish">+新建菜品</el-button>
+        <el-button type="primary" @click="addOrEditDish('')">+新建菜品</el-button>
       </div>
     </div>
     <div class="container-body">
@@ -29,7 +29,7 @@
         <!-- 自定义操作列插槽 -->
         <template #actions="{ row }">
           <div class="table-btn">
-            <el-tag type="primary" class="m-r-10" round @click="addOrEditDish(row)">编辑</el-tag>
+            <el-tag type="primary" class="m-r-10" round @click="addOrEditDish(row.id)">编辑</el-tag>
             <el-tag type="primary" class="m-r-10" round @click="statusHandle('2', row.id)">{{  row.status === 0 ? '启售' : '停售' }}</el-tag>
             <el-tag type="primary" round @click="deleteHandle('1', row.id)">删除</el-tag>
           </div>
@@ -40,7 +40,7 @@
     <ConfirmModal :isShow="isShowConfirmModal" :confirmType="confirmType"
       @closeConfirmModal="closeConfirmModal"></ConfirmModal>
 
-    <AddOrEditDishModal v-if="isShowAddOrEditDishModal" :isShow="isShowAddOrEditDishModal" :id="currentId"
+    <AddOrEditDishModal v-if="isShowAddOrEditDishModal" :isShow="isShowAddOrEditDishModal" :id="currentId" :dish-list="dishList" :flavor-config-list="flavorConfigList"
       @closeAddOrEditDishModal="closeAddOrEditDishModal"></AddOrEditDishModal>
   </div>
 </template>
@@ -54,8 +54,10 @@ import { ElMessage } from 'element-plus';
 import ConfirmModal from '@/views/common/ConfirmModal.vue';
 import { _deleteCategory } from '@/apis/CategoryApi';
 import type { TableRow } from '@/types/TableInter';
-import { getImage } from '@/utils/commonUtils';
 import AddOrEditDishModal from '@/views/dish/AddOrEditDishModal.vue';
+import type { SelectInter } from '@/types/SelectInter';
+import { getDishList, getFlavorConfigList, getImage } from '@/utils/commonUtils';
+
 
 
 // 定义表格列的元数据
@@ -83,11 +85,14 @@ const currentStats = ref<string>('')
 // 编辑 & 新增 弹窗相关
 const isShowAddOrEditDishModal = ref(false);
 const currentId = ref('')
+const dishList = ref<SelectInter[]>([])
+const flavorConfigList = ref<SelectInter[]>([]);
 
 function changePagination(newCurrentPage: number, newPageSize: number) {
   pageSize.value = newPageSize;
   currentPage.value = newCurrentPage;
   // 请求
+  getDishPage()
 }
 
 const selectionChange = (selection: TableRow[]) => {
@@ -184,9 +189,11 @@ const addOrEditDish = (id: string) => {
   currentId.value = id
   isShowAddOrEditDishModal.value = true
 }
-onMounted(() => {
+onMounted(async() => {
   // 获取数据
   getDishPage();
+  dishList.value = await getDishList()
+  flavorConfigList.value = await getFlavorConfigList()
 });
 </script>
 <style lang="scss" scoped>

@@ -244,3 +244,13 @@ a:hover {
 .el-select-dropdown__item.is-selected{
   color: #ffc200 !important;
 }
+
+.el-select {
+  .el-select__wrapper{
+    padding: 1px 12px;
+    .el-select__selection{
+      height: 40px;
+    }
+  }
+  
+}
