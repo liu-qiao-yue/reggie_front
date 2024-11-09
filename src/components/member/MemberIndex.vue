@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="menber-container">
     <div class="tableBar m-b-20">
       <el-input v-model="name" style="width: 240px" placeholder="请输入员工姓名" clearable @keyup.enter="fetchData"
         @clear="fetchData" />

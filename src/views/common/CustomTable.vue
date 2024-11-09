@@ -1,9 +1,9 @@
 <template>
   <div>
     <!-- 表格主体 -->
-    <el-table :data="pagedData" style="width: 100%" stripe  @selection-change="handleSelectionChange" ref="customTableRef">
+    <el-table :data="pagedData" style="width: 100%" stripe @selection-change="handleSelectionChange" ref="customTableRef">
       <!-- 添加序号列，如果需要的话 -->
-      <el-table-column label="序号" width="30" v-if="showIndexColumn">
+      <el-table-column label="序号" width="70" v-if="showIndexColumn" header-align="center" :align="'center'">
         <template #default="{ $index }">
           <!-- 序号计算，考虑到了当前页码和页面大小 -->
           {{ $index + 1 + (internalCurrentPage - 1) * internalPageSize }}
@@ -14,10 +14,8 @@
       <el-table-column type="selection" width="25" v-if="showCheckbox"></el-table-column>
       
       <!-- 遍历列定义 -->
-      <el-table-column v-for="(column, index) in columns" :key="index" header-align="center" :align="'center'"
-        :prop="column.prop" :label="column.label" :width="column.width" :fixed="column.fixed"
-        :cell-style="{ textAlign: 'center' }" :header-cell-style="{ 'text-align': 'center' }"
-        >
+      <el-table-column v-for="(column, index) in columns" :key="index" :header-align="'center'" :align="column.align?column.align:'center'"
+        :prop="column.prop" :label="column.label" :width="column.width" :fixed="column.fixed">
 
         <!-- 如果是操作列，则渲染操作按钮 -->
         <template v-if="column.isActions" #default="{ row, $index }">
@@ -45,13 +43,12 @@
     </el-table>
 
     <!-- 分页组件 -->
-    <el-pagination :current-page="internalCurrentPage" :page-size="internalPageSize" :page-sizes="[10, 15, 30, 50]"
-      :disabled="isDisabledPagination" layout="total, sizes, prev, pager, next, jumper" :total="total"
-      @size-change="handleSizeChange" @current-change="handleCurrentChange" />
+    <el-pagination :current-page="internalCurrentPage" :page-size="internalPageSize" :page-sizes="[10, 15, 30, 50]"  layout="total, sizes, prev, pager, next, jumper" :total="total"
+      @size-change="handleSizeChange" @current-change="handleCurrentChange" v-if="isDisabledPagination"></el-pagination>
   </div>
 </template>
 
-<script lang="ts" setup>
+<script lang="ts" setup name="CustomTable">
 import {computed, ref, defineEmits } from 'vue';
 import type { TableColumn, TableRow } from '@/types/TableInter';
 import type { TableInstance } from 'element-plus'
@@ -60,19 +57,19 @@ import type { TableInstance } from 'element-plus'
 const props = withDefaults(defineProps<{
   tableData: TableRow[];
   columns: TableColumn[];
-  total: number;
+  total?: number;
   isDisabledPagination?: boolean;
   showIndexColumn?: boolean;
   showCheckbox?: boolean; // 新增属性，控制是否显示复选框列
 }>(),{
-  isDisabledPagination: false,
+  isDisabledPagination: true,
   showIndexColumn: false,
   showCheckbox: false,
   total: 0
 });
 
 // 计算分页后的数据
-const pagedData = computed(() => {
+const pagedData = computed(() => {  
   return props.tableData;
 });
 

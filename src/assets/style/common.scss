@@ -254,3 +254,24 @@ a:hover {
   }
   
 }
+
+.el-tag{
+  cursor: pointer;
+  display: inline-block;
+  color: #f19c59 !important;
+  margin: 5px;
+  line-height: 26px;
+  height: 26px;
+  padding: 0 10px;
+  background: #fdf4eb !important;
+  border-radius: 3px;
+  border: solid 1px #fae2cd !important;
+  .el-tag__close{
+    color: #e6a23c !important;
+    flex-shrink: 0;
+    &:hover{
+      background-color: #e6a23c !important;
+      color: #ffffff !important;
+    }
+  }
+}

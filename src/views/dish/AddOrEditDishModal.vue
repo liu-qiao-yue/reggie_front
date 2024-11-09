@@ -341,19 +341,6 @@ const delFlavor = (flavors: DishFlavor[], index: number) => {
         border: solid 1px #d8dde3;
         background: #fff;
         padding: 0 5px;
-
-        .el-tag {
-          display: inline-block;
-          color: #f19c59;
-          margin: 5px;
-          line-height: 26px;
-          height: 26px;
-          padding: 0 10px;
-          background: #fdf4eb;
-          border-radius: 3px;
-          border: solid 1px #fae2cd;
-        }
-
         .inputBox {
           display: inline-block;
           width: 100%;

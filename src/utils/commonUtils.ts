@@ -1,7 +1,7 @@
 import { _getCategoryList } from '@/apis/CategoryApi';
-import { _flavorConfigList } from '@/apis/FlavorConfigurationApi';
+import { _configTreeList } from '@/apis/ConfigurationApi';
 import type { Category } from '@/types/CategoryInter';
-import type { FlavorConfiguration } from '@/types/FlavorConfiguration';
+import type { Configuration } from '@/types/ConfigurationInter';
 import CryptoJS from 'crypto-js';
 export function encodePassword(pwd: string): string {
     return CryptoJS.MD5(pwd).toString();
@@ -24,13 +24,13 @@ export async function getDishList() {
 };
 
 export async function getFlavorConfigList() {
-    const { data } = await _flavorConfigList('');
+    const { data } = await _configTreeList('', '0');
     if (data.code === 1) {
-        return data.data.map((data: FlavorConfiguration) => {
+        return data.data.map((data: Configuration) => {
             return {
                 label: data.name,
                 value: data.id,
-                children: data.children.map((j: FlavorConfiguration) => {
+                children: data.children.map((j: Configuration) => {
                     return {
                         label: j.name,
                         value: j.id

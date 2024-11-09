@@ -30,10 +30,17 @@ export const menuList:Menus = [
         disabled: false
     },
     {
-        id: '848bade6-1913-b0d7-fcce-cbcec294fa75',
+        id: '848bade6-1913-b0d7-fcce-cbcec294fa76',
         path: '/employee/order/index',
         title: '订单明细',
         icon: 'icon-icon-order',
+        disabled: false
+    },
+    {
+        id: '848bade6-1913-b0d7-fcce-cbcec294fa70',
+        path: '/employee/config/index',
+        title: '配置管理',
+        icon: 'icon-icon-config',
         disabled: false
     }
 ]

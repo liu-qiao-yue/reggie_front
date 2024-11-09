@@ -13,4 +13,5 @@ export interface TableColumn {
   isActions?: boolean; // 标记是否为操作列
   formatter?: (value: unknown, row: TableRow) => string; // 单元格格式化函数
   fixed?: string; // 固定列
+  align?: string; // 文本对齐方式
 }

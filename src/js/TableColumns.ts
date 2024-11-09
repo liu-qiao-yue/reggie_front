@@ -102,4 +102,31 @@ const foodColumn: TableColumn[] = [
         width: 200
     }
 ]
-export { employeeColumn, categoryColumn, foodColumn }
+
+const flavorColumn: TableColumn[] = [
+    {
+        prop: 'name',
+        label: '配置名称'
+    },
+    {
+        prop: 'type',
+        label: '配置类型',
+        formatter: (value: unknown) => {            
+            return value === '0' ? '口味做法配置' : '未知'
+        }
+    },
+    {
+        prop: 'children',
+        label: '配置明细',
+        templateSlotName: 'children-column', // 使用自定义插槽
+        width: '550',
+        align: 'left'
+    },
+    {
+        prop: 'actions',
+        label: '操作',
+        isActions: true, // 标记为操作列
+        width: 200
+    }
+]
+export { employeeColumn, categoryColumn, foodColumn, flavorColumn }

@@ -69,6 +69,12 @@ const router = createRouter({
           name: 'dishInfo',
           meta: { title: '管理端/菜品页面', noCache: true, keepAlive: false, id: '6' }
         },
+        {
+          path: 'config/index',
+          component: () => import(`@/components/config/ConfigIndex.vue`),
+          name: 'configInfo',
+          meta: { title: '管理端/配置页面', noCache: true, keepAlive: false, id: '7' }
+        },
       ]
     },
     {
