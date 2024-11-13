@@ -10,7 +10,7 @@
       </div>
       <el-button type="primary" @click="addConfig(null)">+ 添加</el-button>
     </div>
-    <CustomTable :tableData="flavorConfigList" :columns="columns" :isDisabledPagination="false"
+    <CustomTable :tableData="flavorConfigList" :columns="columns" :isPagination="false"
       :show-index-column="true">
       <template #children-column="{ row }">
         <div class="tag-list">

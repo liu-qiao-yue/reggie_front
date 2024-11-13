@@ -29,7 +29,7 @@ app.use(ElementPlus)
 
 // 设置全局错误处理函数
 app.config.errorHandler = (_err, _instance, _info) => {
-    console.log("全局错误处理函数", _info);
+    console.log("全局错误处理函数", _err, _info);
     
 };
 

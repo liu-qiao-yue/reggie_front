@@ -5,7 +5,7 @@
       <el-button type="primary" @click="addType(2)"> + 新增套餐分类</el-button>
     </div>
     <CustomTable :table-data="categoryPage" :columns="columns" :current-page="currentPage" :page-size="pageSize"
-      :total="total" :isDisabledPagination="false" :background="true" @update:pagination="changePagination"
+      :total="total" :isPagination="false" :background="true" @update:pagination="changePagination"
       :show-index-column="true">
       <!-- 自定义操作列插槽 -->
       <template #actions="{ row }">

@@ -1,5 +1,5 @@
 import request from '@/js/request'
-import type { DishDto } from '@/types/DishInter'
+import type { DishDto, DishInter } from '@/types/DishInter'
 
 /**
  * 分页列表
@@ -57,11 +57,11 @@ export function _queryDishById(id: string){
 }
 
 
-export function _queryDishList(ids: string){
+export function _queryDishList(param: DishInter){
     return request({
         url: '/backend/dish/list',
         method: 'get',
-        params: { ids }
+        params: param
     })
 }
 /**

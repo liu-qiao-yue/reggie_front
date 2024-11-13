@@ -44,7 +44,7 @@
 
     <!-- 分页组件 -->
     <el-pagination :current-page="internalCurrentPage" :page-size="internalPageSize" :page-sizes="[10, 15, 30, 50]"  layout="total, sizes, prev, pager, next, jumper" :total="total"
-      @size-change="handleSizeChange" @current-change="handleCurrentChange" v-if="isDisabledPagination"></el-pagination>
+      @size-change="handleSizeChange" @current-change="handleCurrentChange" v-if="isPagination"></el-pagination>
   </div>
 </template>
 
@@ -58,11 +58,11 @@ const props = withDefaults(defineProps<{
   tableData: TableRow[];
   columns: TableColumn[];
   total?: number;
-  isDisabledPagination?: boolean;
+  isPagination?: boolean;
   showIndexColumn?: boolean;
   showCheckbox?: boolean; // 新增属性，控制是否显示复选框列
 }>(),{
-  isDisabledPagination: true,
+  isPagination: true,
   showIndexColumn: false,
   showCheckbox: false,
   total: 0

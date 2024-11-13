@@ -113,7 +113,7 @@ a:hover {
   padding: 0 !important;
 
   .el-dialog__header {
-    padding: 20px 30px;
+    padding: 10px 15px;
     background: #fbfbfa;
     border-radius: 8px 8px 0px 0px;
     border-bottom: 1px solid #e5e4e4;
@@ -234,10 +234,26 @@ a:hover {
 
 
 .el-input__wrapper.is-focus {
-  // border-color: #ffc200;
   outline: 0;
   box-shadow: 0 0 0 1px #ffc200 !important;
 }
+.el-input__wrapper:hover{
+  box-shadow: 0 0 0 1px #ffc200 !important;
+}
+.el-input-number__increase, .el-input-number__increase:hover{
+  background: #fff3ea !important;
+  color: #ffc200 !important;
+  border-left: solid 1px #FFE1CA !important;
+}
+.el-input-number__decrease, .el-input-number__decrease:hover {
+  background: #fff3ea !important;
+  color: #ffc200 !important;
+  border-right: solid 1px #FFE1CA !important;
+}
+.el-input-number__decrease:hover~.el-input:not(.is-disabled) .el-input__wrapper, .el-input-number__increase:hover~.el-input:not(.is-disabled) .el-input__wrapper{
+  box-shadow:  0 0 0 1px #ffc200 !important;
+}
+
 .el-select__wrapper.is-focused{
   box-shadow: 0 0 0 1px #ffc200 !important;box-shadow: 0 0 0 1px #ffc200 !important;
 }

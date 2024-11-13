@@ -1,8 +1,8 @@
 import { _getCategoryList } from '@/apis/CategoryApi';
 import { _configTreeList } from '@/apis/ConfigurationApi';
-import type { Category } from '@/types/CategoryInter';
 import type { Configuration } from '@/types/ConfigurationInter';
 import CryptoJS from 'crypto-js';
+import type { SelectInter } from '@/types/SelectInter';
 export function encodePassword(pwd: string): string {
     return CryptoJS.MD5(pwd).toString();
 }
@@ -11,33 +11,32 @@ export function getImage(image: string): string {
     return image ? `/backend/common/access?name=${image}` : ''
 }
 
-export async function getDishList() {
-    const { data } = await _getCategoryList(1);
+export async function getCategoryList(type: number): Promise<SelectInter[]>{
+    const { data } = await _getCategoryList(type);
     if (data.code === 1) {
-        return data.data.map((data: Category) => {
-            return {
-                label: data.name,
-                value: data.id
-            }
-        })
+        return preprocessConfiguration(data.data)
     }
+    return []
 };
 
-export async function getFlavorConfigList() {
+export async function getFlavorConfigList(): Promise<SelectInter[]>{
     const { data } = await _configTreeList('', '0');
     if (data.code === 1) {
-        return data.data.map((data: Configuration) => {
-            return {
-                label: data.name,
-                value: data.id,
-                children: data.children.map((j: Configuration) => {
-                    return {
-                        label: j.name,
-                        value: j.id
-                    }
-                })
-            }
-        })
+        return preprocessConfiguration(data.data)
 
     }
+    return []
 };
+
+export function preprocessConfiguration(config: Configuration[]): SelectInter[] {
+    return config.map((data: Configuration) => {
+        const item:SelectInter = {
+            label: data.name,
+            value: data.id
+        }
+        if (data.children) {
+            item.children = preprocessConfiguration(data.children)
+        }
+        return item
+    })
+}

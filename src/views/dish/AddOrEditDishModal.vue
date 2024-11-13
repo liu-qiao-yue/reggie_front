@@ -161,7 +161,7 @@ onMounted(async () => {
         i.values = localConfigListChildren.filter((j: SelectInter) => {
           return valueList.includes(j.value)
         })
-      })
+      })      
     }
     
   }

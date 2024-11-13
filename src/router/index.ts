@@ -75,6 +75,18 @@ const router = createRouter({
           name: 'configInfo',
           meta: { title: '管理端/配置页面', noCache: true, keepAlive: false, id: '7' }
         },
+        {
+          path: 'setmeal/index',
+          component: () => import(`@/components/setmeal/SetmealIndex.vue`),
+          name: 'setmealInfo',
+          meta: { title: '管理端/套餐页面', noCache: true, keepAlive: false, id: '8' }
+        },
+        {
+          path: 'order/index',
+          component: () => import(`@/components/order/OrderIndex.vue`),
+          name: 'orderInfo',
+          meta: { title: '管理端/订单页面', noCache: true, keepAlive: false, id: '9' }
+        },
       ]
     },
     {

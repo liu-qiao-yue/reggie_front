@@ -1,7 +1,7 @@
 import type { DishFlavor } from "./DishFlavorInter";
 
 export interface DishInter {
-  id: string;
+  id?: string;
   name?: string;
   categoryId?: string;
   price?: string;

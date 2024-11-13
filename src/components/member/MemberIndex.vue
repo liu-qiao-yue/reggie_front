@@ -6,7 +6,7 @@
       <el-button type="primary" @click="handleEmployee()">+ 添加员工</el-button>
     </div>
     <CustomTable :table-data="pagedData" :columns="columns" :current-page="currentPage" :page-size="pageSize"
-      :total="total" :isDisabledPagination="false" :background="true" @update:pagination="changePagination" :show-index-column="true">
+      :total="total" :isPagination="false" :background="true" @update:pagination="changePagination" :show-index-column="true">
       <!-- 自定义操作列插槽 -->
       <template #actions="{ row }">
         <i class="iconfont icon-icon-edit" title="编辑" @click="handleEmployee(row)"></i>
