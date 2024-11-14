@@ -15,7 +15,7 @@
       
       <!-- 遍历列定义 -->
       <el-table-column v-for="(column, index) in columns" :key="index" :header-align="'center'" :align="column.align?column.align:'center'"
-        :prop="column.prop" :label="column.label" :width="column.width" :fixed="column.fixed">
+        :prop="column.prop" :label="column.label" :width="column.width" :fixed="column.fixed" :show-overflow-tooltip="column.overflowTooltip">
 
         <!-- 如果是操作列，则渲染操作按钮 -->
         <template v-if="column.isActions" #default="{ row, $index }">

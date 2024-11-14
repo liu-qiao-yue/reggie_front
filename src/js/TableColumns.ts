@@ -1,4 +1,5 @@
 import type { TableColumn } from "@/types/TableInter";
+import { getOrdersStatus } from "@/utils/commonUtils";
 
 const employeeColumn: TableColumn[] = [
     {
@@ -204,4 +205,45 @@ const setmealAddDishColumn: TableColumn[] = [
     }
     
 ]
-export { employeeColumn, categoryColumn, foodColumn, flavorColumn, setmealColumn, setmealAddDishColumn }
+
+const ordersColumn: TableColumn[] = [
+    {
+        prop: 'number',
+        label: '订单号'
+    },
+    {
+        prop: 'status',
+        label: '订单状态',
+        formatter: (value: unknown) => {
+            return getOrdersStatus(value as number)
+        }
+    },
+    {
+        prop: 'userName',
+        label: '用户',
+    },
+    {
+        prop: 'phone',
+        label: '手机号'
+    },
+    {
+        prop: 'address',
+        label: '地址',
+        overflowTooltip: true
+    },
+    {
+        prop: 'orderTime',
+        label: '下单时间'
+    },
+    {
+        prop: 'amount',
+        label: '实收金额'
+    },
+    {
+        prop: 'actions',
+        label: '操作',
+        isActions: true, // 标记为操作列
+        width: 200
+    }
+]
+export { employeeColumn, categoryColumn, foodColumn, flavorColumn, setmealColumn, setmealAddDishColumn, ordersColumn }

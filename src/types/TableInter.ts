@@ -14,4 +14,5 @@ export interface TableColumn {
   formatter?: (value: unknown, row: TableRow) => string; // 单元格格式化函数
   fixed?: string; // 固定列
   align?: string; // 文本对齐方式
+  overflowTooltip?:boolean;
 }

@@ -40,3 +40,24 @@ export function preprocessConfiguration(config: Configuration[]): SelectInter[] 
         return item
     })
 }
+
+export function getOrdersStatus(status: number):string{
+    if(status === null){
+        return '未知订单状态'
+    }
+    //1待付款，2待派送，3已派送，4已完成，5已取消
+    switch(status){
+        case 1:
+            return '待付款'
+        case 2:
+            return '待派送'
+        case 3:
+            return '已派送'
+        case 4:
+            return '已完成'
+        case 5:
+            return '已取消'
+        default:
+            return '未知订单状态'
+    }
+}
