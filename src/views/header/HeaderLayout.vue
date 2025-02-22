@@ -24,7 +24,7 @@
     </div>
 </template>
 <script setup lang="ts" name="HeaderLayout">
-import { useMenuStore } from '@/store/useMenuStore';
+import { useMenuStore } from '@/stores/useMenuStore';
 import { onMounted, ref } from 'vue';
 import ResetPassword from '../modal/ResetPassword.vue';
 import { ElMessage } from 'element-plus';
@@ -61,7 +61,7 @@ function resetPassword() {
     showResetPassword.value = true
 }
 
-function closeResetPwd(data: boolean) {    
+function closeResetPwd(data: boolean) {
     showResetPassword.value = false
     if (data) {
         ElMessage.success('密码修改成功，请重新登录')

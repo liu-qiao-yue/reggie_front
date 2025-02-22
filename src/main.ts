@@ -9,13 +9,14 @@ import 'element-plus/dist/index.css'
 import App from './App.vue'
 // 引入路由
 import router from './router'
-// 引入createPinia，用于创建pinia 
-import { createPinia } from 'pinia'
-
+// 引入createPinia，用于创建pinia
+// import { createPinia } from 'pinia'
+import pinia from './stores/store'
 
 
 /* 创建pinia */
-const pinia = createPinia()
+
+// const pinia = createPinia()
 // 创建应用实例
 const app = createApp(App)
 
@@ -30,7 +31,7 @@ app.use(ElementPlus)
 // 设置全局错误处理函数
 app.config.errorHandler = (_err, _instance, _info) => {
     console.log("全局错误处理函数", _err, _info);
-    
+
 };
 
 // 挂载应用实例

@@ -1,12 +1,12 @@
 import request from '@/js/request'
-import type { EmployeeInter } from '@/types/EmployeeInters'
+import type { loginFormInter } from '@/types/EmployeeInters'
 import type { ForgotPasswordRequest, ResetPasswordRequest } from '@/types/PasswordForm'
 
-export function _loginIn (_params:EmployeeInter) {
+export function _loginIn (_params:loginFormInter) {
     return request({
-        url: '/backend/employee/login',
+        url: '/backend/login',
         method: 'post',
-        data: _params
+        params: _params
     })
 }
 
@@ -38,5 +38,19 @@ export function _deleteFile (filename:string) {
         url: '/backend/common/delete',
         method: 'delete',
         params: { filename }
+    })
+}
+
+export function _getCaptcha (captcha:string) {
+    return request({
+        url: '/backend/getCaptcha?captchaType=' + captcha,
+        method: 'get'
+    })
+}
+
+export function _getUserInfo () {
+    return request({
+        url: '/backend/user/info',
+        method: 'get'
     })
 }

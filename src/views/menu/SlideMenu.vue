@@ -11,7 +11,7 @@
 // import { useRouterStore } from '@/store/userouterStore';
 import { menuList } from '@/assets/data/menuData';
 import SlideItem from './SlideItem.vue';
-import { useMenuStore } from '@/store/useMenuStore';
+import { useMenuStore } from '@/stores/useMenuStore';
 /* 引入storeToRefs */
 import { storeToRefs } from 'pinia'
 

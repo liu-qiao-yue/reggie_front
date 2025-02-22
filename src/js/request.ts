@@ -1,5 +1,7 @@
+import { useUserStore } from '@/stores/useUserStore';
 import axios, { AxiosError, type AxiosResponse, type InternalAxiosRequestConfig } from 'axios'
 import { ElLoading, ElMessage } from 'element-plus'
+import pinia from '@/stores/store';
 
 // 扩展 AxiosRequestConfig 接口以包含 showLoading 属性
 declare module 'axios' {
@@ -10,9 +12,12 @@ declare module 'axios' {
 
 // 定义 LoadingInstance 接口
 interface LoadingInstance {
-    close(): void;
+  close(): void;
 }
 
+
+// 初始化用户store
+const userStore = useUserStore(pinia);
 
 let loadingInstance: LoadingInstance | null = null;
 
@@ -38,6 +43,13 @@ service.interceptors.request.use((config: InternalAxiosRequestConfig) => {
       background: 'rgba(0, 0, 0, 0.7)'
     });
   }
+
+  // 添加 token 到请求头部
+  const currentToken = userStore.getToken;
+  if (currentToken) {
+    config.headers.Authorization = currentToken;
+  }
+
   return config
 }, (error: AxiosError) => {
   Promise.reject(error)
@@ -52,10 +64,17 @@ service.interceptors.response.use(
       loadingInstance.close();
     }
 
-    if (response.data.code === 0 && response.data.msg === 'NOTLOGIN'){
+    if (response.data.code === 0 && response.data.msg === 'NOTLOGIN') {
       localStorage.clear()
       window.location.href = '/login'
     }
+
+    debugger
+    const authorizationHeader = response.headers['authorization'];
+    if (authorizationHeader && response.config.url?.includes('login')) {
+      userStore.setToken(authorizationHeader);
+    }
+
     return response;
   },
   (error: AxiosError) => {
